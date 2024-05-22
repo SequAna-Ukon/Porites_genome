@@ -62,7 +62,7 @@ $necat_path/Linux-amd64/bin/necat.pl bridge phar_config.txt
 mv /PATH/TO/polished_contigs.fasta /PATH/TO/Phar_assembly_NECAT.fasta
 
 # ------------------------------------------
-# # QC OF THE ASSMEBLY # #
+# # QC OF THE ASSEMBLY # #
 mamba activate qc_env
 
 mamba install -c bioconda gfastats
