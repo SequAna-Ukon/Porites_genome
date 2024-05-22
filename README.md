@@ -1,54 +1,28 @@
-# Porites_genome
-Porites Genome assembly and annotation using ONT reads
+# _Porites harrisoni_ reference genome assembly & annotation
+Scripts used for the _Porites harrisoni_ referencegenome assembly and annotation using Oxford Nanopore longreads. The _Porites harrisoni_ reference genome is published under NCBI accession number: JBDLLT000000000 and the workflow is described in the following paper: xxx
 
-## Adapter Removal using PoreChop:
+## Assembly
+ONT reads were preprocessed using PoreChop (https://github.com/rrwick/Porechop) and quality control was done using FastQC (https://github.com/s-andrews/FastQC) and NanoPlot (https://github.com/wdecoster/NanoPlot). The reads were filtered and split into assembly (longer; min. length 1000 bp) & polishing (shorter; min. length 500 bp) reads using chopper (https://github.com/wdecoster/chopper)
+* **00.reads_preprocessing.sh**
+  
+Kmer profiling was done using meryl (https://github.com/marbl/meryl) and GenomeScope 2.0 (https://github.com/tbenavi1/genomescope2.0)
+* **01.kmer.sh**
 
-````bash
-porechop –-input reads.fastq -o reads_porechopped.fastq --discard_middle
-````
-## Quality Control:
+The genome was assembled using NECAT (https://github.com/xiaochuanle/NECAT) and the longer assembly reads
+* **02.assembly_NECAT.sh**
 
-Assess the quality of the raw nanopore reads using tools like FastQC or NanoPlot to identify any issues that may need attention.
+The assembly was filtered using BlobToolKit (https://blobtoolkit.genomehubs.org/)
+* **03.assembly_filtering.sh**
 
-https://github.com/wdecoster/NanoPlot
+The assembled and filtered genome was polished using the shorter polishing reads with racon (https://github.com/lbcb-sci/racon) and Medaka (https://github.com/nanoporetech/medaka)
+* **04.assembly_polish.sh**
 
-````bash
-NanoPlot -t 2 --fastq reads1.fastq.gz reads2.fastq.gz --maxlength 40000 --plots dot --legacy hex
-````
-- Not very informative but we can give it a try
+## Annotation
+Repeats in the _Porites harrisoni_ genome were identified using EDTA (https://github.com/oushujun/EDTA) & RepeatModeler (https://github.com/Dfam-consortium/RepeatModeler) and soft-masked using RepeatMasker (https://github.com/rmhubley/RepeatMasker) 
+* **05.repeats.sh**
 
-## Genome assembly
-using Flye, CANU, and MaSuRCA .....
+Transcript and protein evidence were generated for the structural annotation using STAR (https://github.com/alexdobin/STAR), StringTie (https://github.com/gpertea/stringtie) and UniProt Database (https://www.uniprot.org/)
+* **06.structural_annotation.sh**
 
-### 1. Flye
-
-````bash
-flye --nano-hq -g 0.421g --input [input.fastq] --out-dir [output_directory] --scaffold -t 50
-````
-### 2. CANU
-
-````bash
-canu -p [output_prefix] -d [output_directory] genomeSize=0.421g stopOnLowCoverage=5 -nanopore-raw [input.fastq]
-````
-### 3.MaSuRCA
-
-````bash
-runCanu.sh nanopore-[read_type] [config_file]
-````
-- Configuration file for MaSuRCA
-
-````bash
-# Configuration file for MaSuRCA
-
-DATA
-  PE = 
-  JUMP = 
-  OTHER = nanopore-[read_type] raw_reads.fastq
-  # Add additional libraries as needed
-
-PARAMETERS
-  # Specify assembly parameters here, such as genome size estimate, k-mer size, etc.
-
-````
-## Kmer profiling
-Usually, this is for short-reads or high-accurate long reads as "HiFi technology" but we could try
+Functional annotation was generated using funannotate (https://github.com/nextgenusfs/funannotate)
+* **07.functional_annotation.sh**
