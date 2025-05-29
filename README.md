@@ -90,7 +90,7 @@ gt gff3validator Porites_harrisoni.gff3
 -  transmembrane topology and signal peptide predictor
 
 ````bash
-../Results/Annotation/software/phobius/phobius.pl -short Cther.braker.prot.fasta > phobius.results.txt
+phobius.pl -short Cther.braker.prot.fasta > phobius.results.txt
 ````
 
 - IterProScan
