@@ -55,7 +55,7 @@ samtools view -h Phar_RNASeqAll.STAR.bam | awk 'BEGIN{OFS="\t"} /^@/ || ($2==147
 - I used [BRAKER3](https://github.com/Gaius-Augustus/BRAKER)
 
 ````bash
-sudo docker run --user 1000:100  -v $(pwd):/home/jovyan/work  teambraker/braker3:latest braker.pl --species=Porites_harrisoni --genome=work/PAG_UKon_Phar.clean.fasta.masked --bam=work/Phar_plus_strand.bam,work/Phar_minus_strand.bam --stranded=+,- --threads 50 --prot_seq=work/Metazoa.fa --busco_lineage=metazoa_odb10
+sudo docker run --user 1000:100  -v $(pwd):/home/jovyan/work  teambraker/braker3:latest braker.pl --species=Porites_harrisoni --genome=work/PAG_UKon_Phar.fasta.masked --bam=work/Phar_plus_strand.bam,work/Phar_minus_strand.bam --stranded=+,- --threads 50 --prot_seq=work/Metazoa.fa --busco_lineage=metazoa_odb10
 ````
 - Decorate a braker.gtf with UTRs from a stringtie.gff file.
 
@@ -76,16 +76,44 @@ cat braker/braker_with_utrs.gtf |gtf2gff.pl --gff3 -o braker.gff3
 #merge gff files
 agat_sp_merge_annotations.pl --gff braker.gff3 --gff trna_annotation.gff --out merged.gff
 #export protein sequences to proceed with functional annotation
-gffread merged.gff -g PAG_UKon_Phar.clean.fasta -y Phar.braker.prot.fasta
+gffread merged.gff -g PAG_UKon_Phar.fasta -y Phar.braker.prot.fasta
 ````
 
-- As a new rule, i'm checking for overlapping genes using agat and validating the gff file using gt
+- As a new rule, I'm checking for overlapping genes using agat and validating the gff file using gt
 
 ````bash
 agat_sp_fix_overlaping_genes.pl -f merged.gff -o Porites_harrisoni.gff3
 gt gff3validator Porites_harrisoni.gff3
 ````
   
-
 * **07.functional_annotation.sh**
-tbd
+-  transmembrane topology and signal peptide predictor
+
+````bash
+../Results/Annotation/software/phobius/phobius.pl -short Cther.braker.prot.fasta > phobius.results.txt
+````
+
+- IterProScan
+  
+````bash
+funannotate iprscan -i Phar.braker.prot.fasta -m docker -c 50-o Phar_iprscan.xml
+````
+
+- eggnog-mapper
+
+````bash
+emapper.py --cpu 50 -m mmseqs --data_dir funannotate_DB  -i Phar.braker.prot.fasta -o Phar_eggnog
+````
+
+- Implement annotation using funannotate
+
+````bash
+funannotate annotate --gff Porites_harrisoni.gff3 --fasta PAG_UKon_Phar.fasta -s "Porites harrisoni" --busco_db  metazoa --eggnog Phar_eggnog.emapper.annotations --iprscan Phar_iprscan.xml --phobius phobius.results.txt --cpus 100 -o braker_anno
+````
+
+- Prepare sqn file for NCBI submission
+
+```bash
+table2asn -M n -J -c w -euk -t Phar_ncbi.sbt -i PAG_UKon_Phar.fasta -gaps-min 10 -l paired-ends -j "[organism=Porites harrisoni] [isolate=UAE_SA_Phar_3_34-1_1080]" -locus-tag-prefix ABFA07 -f Porites_harrisoni.gff3 -o PAG_UKon_Phar.sqn -Z
+
+````
