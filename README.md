@@ -6,7 +6,7 @@ Scripts used for the _Porites harrisoni_ referencegenome assembly and annotation
 
 ONT reads were preprocessed using PoreChop (https://github.com/rrwick/Porechop) and quality control was done using FastQC (https://github.com/s-andrews/FastQC) and NanoPlot (https://github.com/wdecoster/NanoPlot). The reads were filtered and split into assembly reads (longer; min. length 1000 bp) & polishing reads (shorter; min. length 500 bp) using chopper (https://github.com/wdecoster/chopper).
 
-* **01.kmer.sh**
+* **01.kmer_genome_size.sh**
   
 Kmer profiling was done using meryl (https://github.com/marbl/meryl) and GenomeScope 2.0 (https://github.com/tbenavi1/genomescope2.0).
 
