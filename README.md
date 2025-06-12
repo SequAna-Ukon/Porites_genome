@@ -20,7 +20,7 @@ The assembly was filtered using BlobToolKit (https://blobtoolkit.genomehubs.org/
 
 * **04.assembly_polish.sh**
   
-The assembled and filtered genome was polished using the shorter polishing reads with racon (https://github.com/lbcb-sci/racon) and Medaka (https://github.com/nanoporetech/medaka).
+The assembled and filtered genome was polished using the shorter polishing reads with racon (https://github.com/lbcb-sci/racon) and Medaka (https://github.com/nanoporetech/medaka). The polished assembly was cleaned and headers were renamed and sorted using funannotate clean and funannotate sort (https://github.com/nextgenusfs/funannotate).
 
 ## Annotation
 * **05.repeats.sh**
