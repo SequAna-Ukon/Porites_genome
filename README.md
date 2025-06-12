@@ -29,7 +29,7 @@ Repeats in the _Porites harrisoni_ genome were identified using EDTA (https://gi
 
 * **06.structural_annotation.sh**
 
-
+Structural annotation was done using BRAKER3 (https://github.com/Gaius-Augustus/BRAKER). First, tRNAs were identified using tRNAscan-SE (https://github.com/UCSC-LoweLab/tRNAscan-SE), which were subsequently filtered for high-confidence tRNAs using EukHighConfidenceFilter implemented in tRNAscan-SE. The high-confidence set of tRNAs was merged with the BRAKER3 structural predictions. Then, the gff3 file was checked for overlapping genes using AGAT (https://agat.readthedocs.io/en/latest/index.html) and validated using GenomeTools v1.6.5 (https://github.com/genometools/genometools). Finally, GffRead (https://github.com/gpertea/gffread) was used to extract the predicted protein sequences from the merged file to use in the functional annotation.
 
   
 * **07.functional_annotation.sh**
