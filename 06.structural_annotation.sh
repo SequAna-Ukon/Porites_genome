@@ -55,7 +55,7 @@ samtools view -h Phar_RNASeqAll.STAR.bam | awk 'BEGIN{OFS="\t"} /^@/ || ($2==147
 
 ##############################################################
 
-# BRAKER3
+# BRAKER3 (https://github.com/Gaius-Augustus/BRAKER)
 sudo docker run --user 1000:100  -v $(pwd):/home/jovyan/work  teambraker/braker3:latest braker.pl --species=Porites_harrisoni --genome=work/PAG_UKon_Phar_1.1.fasta.masked --bam=work/Phar_plus_strand.bam,work/Phar_minus_strand.bam --stranded=+,- --threads 50 --prot_seq=work/Metazoa.fa --busco_lineage=metazoa_odb10
 
 # # UTRs # #
