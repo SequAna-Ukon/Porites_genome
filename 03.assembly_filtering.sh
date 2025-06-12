@@ -10,7 +10,7 @@ ln -s /path/to/necat/meta_phar_necat.yaml .
 cd /path/to/databases/20230316_ncbi/
 
 blastn -db ./nt/nt \
--query /path/to/necat/draft_assembly.fa \
+-query /path/to/necat/Phar_assembly_NECAT.fasta \
 -outfmt "6 qseqid staxids bitscore std" \
 -max_target_seqs 10 \
 -max_hsps 1 \
@@ -20,7 +20,7 @@ blastn -db ./nt/nt \
 
 cd /path/to/databases/uniprot/
 
-diamond blastx --query /path/to/necat/draft_assembly.fa \
+diamond blastx --query /path/to/necat/Phar_assembly_NECAT.fasta \
 --db reference_proteomes.dmnd \
 --outfmt 6 qseqid staxids bitscore qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore \
 --sensitive \
@@ -31,11 +31,11 @@ diamond blastx --query /path/to/necat/draft_assembly.fa \
 
 # create coverage file
 
-minimap2 -ax sr -t 32 /path/to/necat/draft_assembly.fa \
+minimap2 -ax sr -t 32 /path/to/necat/Phar_assembly_NECAT.fasta \
 /path/to/raw_reads/Phar_reads_porechopped.fastq.gz | samtools sort -@32 -O BAM -o phar_btk_cov.bam -
 
 # Create a BlobDir from a fasta assembly file
-blobtools create --fasta /path/to/necat/draft_assembly.fa --meta meta_phar.yaml --taxid 627007 --taxdump /path/to/btk/taxdump/ btk
+blobtools create --fasta /path/to/necat/Phar_assembly_NECAT.fasta --meta meta_phar.yaml --taxid 627007 --taxdump /path/to/btk/taxdump/ btk
 
 # add hits to BlobDir
 blobtools add --hits phar_diamond.blastx.out --hits blastn_phar.out --taxrule bestsumorder --taxdump /path/to/btk/taxdump/ btk
@@ -53,4 +53,4 @@ blobtools view --remote btk
 # If your interactive session includes a selection, details of the selection are not captured in the url query string. Instead the selection can be exported as a JSON format list file that includes details of any filter parameters
 # and a list of selected contigs. This file can be used to filter the assembly with the --json option.
 
-blobtools filter --json /path/to/exported_list_file.json --fasta /path/to/necat/draft_assembly.fasta btk
+blobtools filter --json /path/to/exported_list_file.json --fasta /path/to/necat/Phar_assembly_NECAT.fasta btk
