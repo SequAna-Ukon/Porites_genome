@@ -1,5 +1,5 @@
 # _Porites harrisoni_ reference genome assembly & annotation
-Scripts used for the _Porites harrisoni_ referencegenome assembly and annotation using Oxford Nanopore longreads. The _Porites harrisoni_ reference genome is published under NCBI accession number: JBDLLT000000000 and the workflow is described in the following paper: xxx
+Scripts used for the _Porites harrisoni_ referencegenome assembly and annotation using Oxford Nanopore longreads. The _Porites harrisoni_ genome assembly (including the mitogenome as a single contig) and annotation (GenBank accession number: JBDLLT000000000; https://www.ncbi.nlm.nih.gov/nuccore/JBDLLT000000000) are deposited at NCBI under the BioProject PRJNA1111311 (https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1111311) under the Umbrella BioProject PRJNA749006 (https://www.ncbi.nlm.nih.gov/bioproject/PRJNA749006).
 
 ## Assembly
 * **00.reads_preprocessing.sh**
