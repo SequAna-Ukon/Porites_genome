@@ -28,12 +28,6 @@ docker run -v $PWD:/in -w /in dfam/tetools:latest RepeatModeler -database Phar_g
 
 ################## EDTA #####################
 docker run -v $PWD:/in -w /in quay.io/biocontainers/edta:2.2.2--hdfd78af_1 EDTA.pl --genome $assembly --sensitive 1 --anno 1 -t 32 --overwrite 1 --force 1
-   
-# TE annotation using the EDTA library has finished! Check out:
-#                 Whole-genome TE annotation (total TE: 43.97%): .EDTA.TEanno.gff3
-#                 Whole-genome TE annotation summary: .EDTA.TEanno.sum
-#                 Whole-genome TE divergence plot: _divergence_plot.pdf
-#                 Whole-genome TE density plot: .EDTA.TEanno.density_plots.pdf
 
 ############ COMBINE REPEAT MODELER & EDTA ############### 
 
