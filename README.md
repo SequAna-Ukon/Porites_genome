@@ -1,11 +1,11 @@
 # _Porites harrisoni_ reference genome assembly & annotation
 Scripts used for the _Porites harrisoni_ reference genome assembly and annotation.
 
-**Open Access publication**
-Fiesinger, Anna, Abdoallah Sharaf, Rachel Alderdice, Gabriela Perna, Hannah Manns, John A. Burt, and Christian R. Voolstra. “The Genome of the Reef-Building Coral Porites Harrisoni from the Southern Persian/Arabian Gulf.” GigaByte (Hong Kong, China) 2026, no. gigabyte174 (March 18, 2026). [https://doi.org/10.46471/gigabyte.174](https://doi.org/10.46471/gigabyte.174).
+**Open Access publication**  
+Fiesinger, Anna, Abdoallah Sharaf, Rachel Alderdice, Gabriela Perna, Hannah Manns, John A. Burt, and Christian R. Voolstra. “The Genome of the Reef-Building Coral *Porites harrisoni* from the Southern Persian/Arabian Gulf.” *GigaByte* (Hong Kong, China) 2026, no. gigabyte174 (March 18, 2026). [https://doi.org/10.46471/gigabyte.174](https://doi.org/10.46471/gigabyte.174).
 
-**Data availability**
-Raw gDNA sequencing data (Oxford Nanopore long-reads) are deposited at NCBI under the BioProject PRJNA1111311 (https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1111311) and raw RNA-Seq data are deposited under the BioProject PRJNA1354406 (https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1354406), both accessible under the Umbrella BioProject PRJNA749006 (https://www.ncbi.nlm.nih.gov/bioproject/PRJNA749006). This Whole Genome Shotgun project has been deposited at DDBJ/ENA/GenBank under the accession JBDLLT000000000 (https://www.ncbi.nlm.nih.gov/nuccore/JBDLLT000000000). The *Porites harrisoni* genome is version JBDLLT020000000. 
+**Data availability**  
+Raw gDNA sequencing data (Oxford Nanopore long reads) are deposited at NCBI under BioProject [PRJNA1111311](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1111311), and raw RNA-Seq data are deposited under BioProject [PRJNA1354406](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1354406), both accessible under the Umbrella BioProject [PRJNA749006](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA749006). This Whole Genome Shotgun project has been deposited at DDBJ/ENA/GenBank under accession [JBDLLT000000000](https://www.ncbi.nlm.nih.gov/nuccore/JBDLLT000000000). The *Porites harrisoni* genome is version JBDLLT020000000.
 
 ## Assembly Scripts
 * **00.reads_preprocessing.sh**
